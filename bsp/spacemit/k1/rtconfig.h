@@ -67,7 +67,7 @@
 #define RT_CPUS_NR 8
 #define RT_ALIGN_SIZE 8
 #define RT_THREAD_PRIORITY_32
-#define RT_THREAD_PRIORITY_MAX 32
+#define RT_THREAD_PRIORITY_MAX 256
 #define RT_TICK_PER_SECOND 100
 #define RT_USING_OVERFLOW_CHECK
 #define RT_USING_HOOK
@@ -88,6 +88,7 @@
 #define RT_DEBUGING_ASSERT
 #define RT_DEBUGING_COLOR
 #define RT_DEBUGING_CONTEXT
+#define RT_DEBUGING_AUTO_INIT
 
 /* Inter-Thread communication */
 
@@ -98,6 +99,20 @@
 #define RT_USING_MESSAGEQUEUE
 #define RT_USING_SIGNALS
 /* end of Inter-Thread communication */
+
+/* RISC-V Architecture Configuration */
+
+#define ARCH_TEXT_OFFSET 0x200000
+#define ARCH_RAM_OFFSET 0x3FE00000
+#define ARCH_SECONDARY_CPU_STACK_SIZE 4096
+#define ARCH_HAVE_EFFICIENT_UNALIGNED_ACCESS
+#define ARCH_HEAP_SIZE 0x4000000
+#define ARCH_INIT_PAGE_SIZE 0x400000
+#define ARCH_RISCV_FPU
+#define ARCH_USING_NEW_CTX_SWITCH
+#define RT_USING_CPU_FFS
+
+/* end of RISC-V Architecture Configuration */
 
 /* Memory Management */
 
@@ -119,24 +134,11 @@
 #define RT_USING_STDC_ATOMIC
 #define RT_BACKTRACE_LEVEL_MAX_NR 32
 /* end of RT-Thread Kernel */
-#define ARCH_TEXT_OFFSET 0x200000
-#define ARCH_RAM_OFFSET 0
-#define ARCH_SECONDARY_CPU_STACK_SIZE 4096
-#define ARCH_HAVE_EFFICIENT_UNALIGNED_ACCESS
-#define ARCH_HEAP_SIZE 0x4000000
-#define ARCH_INIT_PAGE_SIZE 0x400000
-
-/* RISC-V Architecture Configuration */
-
-#define ARCH_RISCV_FPU
-#define ARCH_USING_NEW_CTX_SWITCH
-#define ARCH_USING_RISCV_COMMON64
-/* end of RISC-V Architecture Configuration */
 #define ARCH_CPU_64BIT
 #define RT_USING_CACHE
-#define RT_USING_CPU_FFS
 #define ARCH_MM_MMU
 #define ARCH_RISCV
+#define ARCH_USING_RISCV_COMMON64
 #define ARCH_REMAP_KERNEL
 
 /* RT-Thread Components */
@@ -461,6 +463,9 @@
 
 /* Utilities */
 
+#define RT_USING_UTEST
+#define UTEST_THR_STACK_SIZE 4096
+#define UTEST_THR_PRIORITY 20
 #define RT_USING_RESOURCE_ID
 #define RT_USING_ADT
 #define RT_USING_ADT_AVL
@@ -489,6 +494,61 @@
 
 /* RT-Thread Utestcases */
 
+#define RT_USING_UTESTCASES
+
+/* Utest Self Testcase */
+
+/* end of Utest Self Testcase */
+
+/* Kernel Testcase */
+
+#define UTEST_MEMHEAP_TC
+
+/* Kernel SMP Testcase */
+
+#define UTEST_SMP_AFFFINITY_TC
+#define UTEST_SMP_ASSIGNED_IDLE_CORE_TC
+#define UTEST_SMP_INTERRUPT_PRI_TC
+#define UTEST_SMP_SPINLOCK_TC
+#define UTEST_SMP_THREAD_PREEMPTION_TC
+/* end of Kernel SMP Testcase */
+/* end of Kernel Testcase */
+
+/* CPP11 Testcase */
+
+/* end of CPP11 Testcase */
+
+/* Utest Serial Testcase */
+
+/* end of Utest Serial Testcase */
+
+/* Serial-Bypass Testcase */
+
+/* end of Serial-Bypass Testcase */
+
+/* Utest IPC Testcase */
+
+/* end of Utest IPC Testcase */
+
+/* RTT Posix Testcase */
+
+/* end of RTT Posix Testcase */
+
+/* Memory Management Subsytem Testcase */
+
+/* end of Memory Management Subsytem Testcase */
+
+/* Tmpfs Testcase */
+
+/* end of Tmpfs Testcase */
+
+/* SMP-Call Testcase */
+
+/* end of SMP-Call Testcase */
+
+/* SyStem Performance Testcase */
+
+/* end of SyStem Performance Testcase */
 /* end of RT-Thread Utestcases */
 
 /* RT-Thread online packages */
@@ -612,6 +672,10 @@
 /* GD32 Drivers */
 
 /* end of GD32 Drivers */
+
+/* HPMicro SDK */
+
+/* end of HPMicro SDK */
 /* end of HAL & SDK Drivers */
 
 /* sensors drivers */

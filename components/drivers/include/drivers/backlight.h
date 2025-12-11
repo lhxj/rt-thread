@@ -42,7 +42,7 @@ struct rt_backlight_device
 
     const struct rt_backlight_ops *ops;
 
-    struct rt_spinlock spinlock;
+    struct rt_mutex lock;
     void *priv;
 };
 

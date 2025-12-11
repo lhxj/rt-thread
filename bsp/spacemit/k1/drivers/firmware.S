@@ -7,12 +7,13 @@
  * Date           Author       Notes
  * 2024-5-1       GuEe-GUI     first version
  */
-
-#include <firmware-spacemit.h>
-
-    .section ".rodata"
-    SPACEMIT_FIRMWARE_DEFINE esos.elf
-
-SPACEMIT_FIRMWARE_START
-    SPACEMIT_FIRMWARE_REF esos.elf
-SPACEMIT_FIRMWARE_END
+/*
+*#include <firmware-spacemit.h>
+*
+*    .section ".rodata"
+*    SPACEMIT_FIRMWARE_DEFINE esos.elf
+*
+*SPACEMIT_FIRMWARE_START
+*    SPACEMIT_FIRMWARE_REF esos.elf
+*SPACEMIT_FIRMWARE_END
+*/

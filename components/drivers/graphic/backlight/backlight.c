@@ -99,7 +99,7 @@ rt_err_t rt_backlight_register(struct rt_backlight_device *bl)
     rt_dm_dev_set_name(&bl->parent, "backlight%u", device_id);
     dev_name = rt_dm_dev_get_name(&bl->parent);
 
-    rt_spin_lock_init(&bl->spinlock);
+    rt_mutex_init(&bl->lock, dev_name, RT_IPC_FLAG_PRIO);
 
     bl->parent.type = RT_Device_Class_Char;
 #ifdef RT_USING_DEVICE_OPS
@@ -147,7 +147,7 @@ rt_err_t rt_backlight_set_power(struct rt_backlight_device *bl, enum rt_backligh
         return -RT_EINVAL;
     }
 
-    rt_spin_lock(&bl->spinlock);
+    rt_mutex_take(&bl->lock, RT_WAITING_FOREVER);
 
     old_power = bl->props.power;
     bl->props.power = power;
@@ -157,7 +157,7 @@ rt_err_t rt_backlight_set_power(struct rt_backlight_device *bl, enum rt_backligh
         bl->props.power = old_power;
     }
 
-    rt_spin_unlock(&bl->spinlock);
+    rt_mutex_release(&bl->lock);
 
     return err;
 }
@@ -169,11 +169,11 @@ rt_err_t rt_backlight_get_power(struct rt_backlight_device *bl, enum rt_backligh
         return -RT_EINVAL;
     }
 
-    rt_spin_lock(&bl->spinlock);
+    rt_mutex_take(&bl->lock, RT_WAITING_FOREVER);
 
     *out_power = bl->props.power;
 
-    rt_spin_unlock(&bl->spinlock);
+    rt_mutex_release(&bl->lock);
 
     return RT_EOK;
 }
@@ -188,7 +188,7 @@ rt_err_t rt_backlight_set_brightness(struct rt_backlight_device *bl, rt_uint32_t
         return -RT_EINVAL;
     }
 
-    rt_spin_lock(&bl->spinlock);
+    rt_mutex_take(&bl->lock, RT_WAITING_FOREVER);
 
     old_brightness = bl->props.brightness;
     bl->props.brightness = brightness;
@@ -198,7 +198,7 @@ rt_err_t rt_backlight_set_brightness(struct rt_backlight_device *bl, rt_uint32_t
         bl->props.brightness = old_brightness;
     }
 
-    rt_spin_unlock(&bl->spinlock);
+    rt_mutex_release(&bl->lock);
 
     return err;
 }
@@ -212,7 +212,7 @@ rt_err_t rt_backlight_get_brightness(struct rt_backlight_device *bl, rt_uint32_t
         return -RT_EINVAL;
     }
 
-    rt_spin_lock(&bl->spinlock);
+    rt_mutex_take(&bl->lock, RT_WAITING_FOREVER);
 
     if (bl->ops->get_brightness)
     {
@@ -225,7 +225,7 @@ rt_err_t rt_backlight_get_brightness(struct rt_backlight_device *bl, rt_uint32_t
         err = RT_EOK;
     }
 
-    rt_spin_unlock(&bl->spinlock);
+    rt_mutex_release(&bl->lock);
 
     return err;
 }

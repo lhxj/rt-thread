@@ -328,4 +328,4 @@ static struct rt_platform_driver pxa_pwm_driver =
     .probe = pxa_pwm_probe,
     .remove = pxa_pwm_remove,
 };
-RT_PLATFORM_DRIVER_EXPORT(pxa_pwm_driver);
+/*RT_PLATFORM_DRIVER_EXPORT(pxa_pwm_driver);*/

@@ -31,6 +31,9 @@
 
 static int rootfs_mnt_init(void)
 {
+    /* ==== 调试标记：证明函数正在运行 ==== */
+    rt_kprintf("\n[MNT_DBG] rootfs_mnt_init is running!\n");
+    /* ================================= */
     rt_err_t err = -RT_ERROR;
     void *fsdata = RT_NULL;
     const char *cromfs_type = "crom";
@@ -147,7 +150,7 @@ static int rootfs_mnt_init(void)
 
     return 0;
 }
-INIT_ENV_EXPORT(rootfs_mnt_init);
+/* INIT_ENV_EXPORT(rootfs_mnt_init); */
 
 static int fstab_mnt_init(void)
 {
@@ -167,4 +170,4 @@ static int fstab_mnt_init(void)
 
     return 0;
 }
-INIT_FS_EXPORT(fstab_mnt_init);
+/* INIT_ENV_EXPORT(rootfs_mnt_init); */

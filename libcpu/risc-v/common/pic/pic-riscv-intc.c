@@ -185,7 +185,7 @@ rt_inline void riscv_intc_irq_send_ipi_raw(struct riscv_intc *rv_intc, int ipi, 
 #ifndef ARCH_RISCV_M_MODE
     if (!riscv_aclint_ipi_base)
     {
-        // sbi_send_ipi((const unsigned long *)cpumask);
+        /*sbi_send_ipi((const unsigned long *)cpumask);*/
     }
 #endif /* !ARCH_RISCV_M_MODE */
 }

@@ -1508,4 +1508,4 @@ static struct rt_platform_driver k1x_sdhci_driver =
     .probe = k1x_sdhci_probe,
     .remove = k1x_sdhci_remove,
 };
-RT_PLATFORM_DRIVER_EXPORT(k1x_sdhci_driver);
+/*RT_PLATFORM_DRIVER_EXPORT(k1x_sdhci_driver);*/

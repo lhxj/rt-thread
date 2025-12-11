@@ -22,6 +22,14 @@
 #include <mm_aspace.h>
 #include "dev_sdio_dm.h"
 
+/* Add missing errno definitions */
+
+#ifndef ENOMEDIUM
+
+#define ENOMEDIUM  123 /* No medium found */
+
+#endif
+
 static unsigned int debug_quirks = 0;
 static unsigned int debug_quirks2;
 

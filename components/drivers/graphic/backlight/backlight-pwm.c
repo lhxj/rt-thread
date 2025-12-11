@@ -561,4 +561,4 @@ static struct rt_platform_driver pwm_backlight_driver =
     .remove = pwm_backlight_remove,
     .shutdown = pwm_backlight_shutdown,
 };
-RT_PLATFORM_DRIVER_EXPORT(pwm_backlight_driver);
+/*RT_PLATFORM_DRIVER_EXPORT(pwm_backlight_driver);*/

@@ -285,4 +285,4 @@ static struct rt_platform_driver pwm_fan_cool_driver =
     .remove = pwm_fan_cool_remove,
     .shutdown = pwm_fan_cool_shutdown,
 };
-RT_PLATFORM_DRIVER_EXPORT(pwm_fan_cool_driver);
+/*RT_PLATFORM_DRIVER_EXPORT(pwm_fan_cool_driver);*/

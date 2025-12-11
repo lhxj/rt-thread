@@ -1121,6 +1121,7 @@ static struct rt_clk_cell *spacemit_k1x_ccu_cell[] =
 static rt_err_t spacemit_k1x_ccu_probe(struct rt_platform_device *pdev)
 {
     rt_err_t err;
+    int reg_count;
     struct ccu_common *common;
     struct rt_clk *clk;
     struct rt_clk_cell *cell;
@@ -1132,7 +1133,9 @@ static rt_err_t spacemit_k1x_ccu_probe(struct rt_platform_device *pdev)
         return -RT_ENOMEM;
     }
 
-    for (int i = 0; i < CRU_BASE_TYPE_AUDC; ++i)
+    reg_count = rt_dm_dev_get_address_count(dev);
+
+    for (int i = 0; i < reg_count; ++i)
     {
         kclk->mmio[i] = rt_dm_dev_iomap(dev, i);
 
@@ -1154,7 +1157,7 @@ static rt_err_t spacemit_k1x_ccu_probe(struct rt_platform_device *pdev)
 
         common->lock = &k1_cru_lock;
 
-        if (common->base_type < CRU_BASE_TYPE_AUDC)
+        if (common->base_type < reg_count)
         {
             common->base = kclk->mmio[common->base_type];
         }
