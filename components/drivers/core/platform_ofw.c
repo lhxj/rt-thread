@@ -223,16 +223,14 @@ rt_err_t rt_platform_ofw_request(struct rt_ofw_node *np)
 
         if (dev)
         {
-            /* Was create */
-            if (dev->drv)
-            {
-                /* Was probe OK */
-                err = RT_EOK;
-            }
-            else
-            {
-                err = rt_bus_reload_driver_device(dev->bus, dev);
-            }
+            /*
+             * Device was already created (np->dev != NULL).
+             * - If it's already probed (dev->drv != NULL), nothing to do.
+             * - If not yet probed (dev->drv == NULL), it belongs to its native bus
+             *   (e.g. I2C/SPI) which will handle probing; platform bus should not reload
+             *   or transfer it, to avoid cross-bus conflicts.
+             */
+            err = RT_EOK;
         }
         else
         {

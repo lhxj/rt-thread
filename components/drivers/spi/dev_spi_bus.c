@@ -69,6 +69,9 @@ void spi_bus_scan_devices(struct rt_spi_bus *bus)
                 continue;
             }
 
+            /* Mark this OFW node as taken to prevent platform bus from creating duplicate device */
+            spi_dev_np->dev = &spi_dev->parent;
+
             rt_spi_device_register(spi_dev);
         }
     }

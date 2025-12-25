@@ -63,6 +63,9 @@ void i2c_bus_scan_clients(struct rt_i2c_bus_device *bus)
 
             rt_dm_dev_set_name(&client->parent, "%s", client->name);
 
+            /* Mark this OFW node as taken to prevent platform bus from creating duplicate device */
+            i2c_client_np->dev = &client->parent;
+
             rt_i2c_device_register(client);
 
             if (i2c_client_np != child_np)
