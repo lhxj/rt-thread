@@ -1,0 +1,23 @@
+# for module compiling
+import os
+from building import *
+
+cwd = GetCurrentDir()
+objs = []
+subdirs = os.listdir(cwd)
+
+for d in subdirs:
+    path = os.path.join(cwd, d)
+    if os.path.isfile(os.path.join(path, 'SConscript')):
+        objs = objs + SConscript(os.path.join(d, 'SConscript'))
+
+# 条件包含 dm 子系统：仅当配置启用 RT_USING_DM 时编译
+try:
+    from building import GetDepend
+    if GetDepend('RT_USING_DM'):
+        objs = objs + SConscript(cwd + '/../dm/SConscript', variant_dir = 'dm', duplicate = 0)
+except Exception as e:
+    # 若构建环境异常，保持与 k1 一致的行为以避免中断
+    objs = objs + SConscript(cwd + '/../dm/SConscript', variant_dir = 'dm', duplicate = 0)
+
+Return('objs')

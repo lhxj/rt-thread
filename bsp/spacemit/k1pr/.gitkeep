@@ -1,0 +1,6 @@
+# k1pr - Phase 1 最小可执行系统
+# 从 k1 完整版本精简出来的最小 K1 BSP
+# 无 DM 框架，仅包含：
+# - RISC-V 64-bit SMP 启动
+# - UART 控制台
+# - 基础 IPC 和内存管理
